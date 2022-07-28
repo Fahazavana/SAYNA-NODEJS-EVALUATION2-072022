@@ -1,20 +1,18 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require("express");
+const path = require("path");
+const app = express();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// Router
+const pageRouter = require("./routes/pages");
+app.set("views", path.join(__dirname, "./views"));
+app.set("view engine", "ejs");
 
-var app = express();
-
-app.use(logger('dev'));
+// Middleware
+app.use(express.static(path.join(__dirname + "/public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// register routes
+app.use("/", pageRouter);
 
 module.exports = app;
