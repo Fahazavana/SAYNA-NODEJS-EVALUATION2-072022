@@ -6,7 +6,7 @@ const backendView = (req, res) => {
 };
 
 const frontendView = (req, res) => {
-  res.render("index");
+  res.render("frontend");
 };
 const marketingView = (req, res) => {
   res.render("marketing");
