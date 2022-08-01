@@ -1,47 +1,19 @@
--- MySQL dump 10.13  Distrib 8.0.29, for Linux (x86_64)
---
--- Host: 127.0.0.1    Database: db_dclic
--- ------------------------------------------------------
--- Server version	8.0.29
+CREATE SCHEMA IF NOT EXISTS `db_dclic`;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE TABLE IF NOT EXISTS `db_dclic`.`Avis` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `firstname` VARCHAR(25) NOT NULL,
+  `lastname` VARCHAR(25) NOT NULL,
+  `avis` TEXT NULL DEFAULT NULL,
+  `note` INT NULL DEFAULT NULL,
+  `formation` ENUM('Frontend', 'Backend', 'Marketing', 'UX-UI') NOT NULL DEFAULT 'Frontend',
+  `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
---
--- Table structure for table `Avis`
---
+USE `db_dclic`;
 
-DROP TABLE IF EXISTS `Avis`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Avis` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(25) NOT NULL,
-  `lastname` varchar(25) NOT NULL,
-  `avis` varchar(255) DEFAULT NULL,
-  `note` int DEFAULT NULL,
-  `formation` enum('Frontend','Backend','Marketing','UX-UI') NOT NULL DEFAULT 'Frontend',
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2022-08-01 10:16:55
+INSERT INTO `Avis` VALUES (1,'Jean','Lucien','C\'était un très bonne aventure, qui ma permis d\'apprendre beaucoup de chose',5,'Backend','2022-08-01 13:36:26'),
+                          (2,'Mr ','X','Very Good',5,'Frontend','2022-08-01 13:38:40'),(3,'Mr ','X','Very Good',5,'Frontend','2022-08-01 13:38:52'),
+                          (4,'Luca','Fahazavana','Super formation',4,'Backend','2022-08-01 14:03:36');

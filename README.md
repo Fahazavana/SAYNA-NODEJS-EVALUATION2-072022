@@ -7,3 +7,4 @@
 * cors
 * ejs
 
+(.env_sample is the model for .env)
