@@ -3,7 +3,7 @@
   const fname = document.querySelector("#fname");
   const lname = document.querySelector("#lname");
   const avis = document.querySelector("#avis");
-  const note = document.querySelector("#note");
+                                      const note = document.querySelector("#Note");
   const formation = document.querySelector("#formation");
   const form = document.querySelector("form");
 
@@ -23,17 +23,21 @@
     }
     return errors;
   };
+
   const setError = (key, value) => {
     const id = key + "Error";
     let err = document.getElementById(id);
     err.innerText = value;
+    err.style.display = 'block'
   };
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
     let errors = checkError();
     for (const [key, value] of Object.entries(errors)) {
       setError(key, value);
     }
+    errors = {}
   };
   form.addEventListener("submit", onSubmitHandler);
 

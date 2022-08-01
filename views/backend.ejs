@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="fr">
 <%- include("partials/_head.ejs") %>
+
 <body>
 	<div class="container">
 		<%- include('./partials/_menu') %>
 		<div class="banner">
 			<div class="app-text">
-		<h1>
-			D-CLIC <br />
-			Venez coder le serveur avec nous
-		</h1>
-		<p>
-			Ici on étudie la gestion des bases de données <br />
-			la logique de l’application, <br />
-			les API etc…,
-		</p>
-		<!-- <div class="play-btn">
+				<h1>
+					D-CLIC <br />
+					Venez coder le serveur avec nous
+				</h1>
+				<p>
+					Ici on étudie la gestion des bases de données <br />
+					la logique de l’application, <br />
+					les API etc…,
+				</p>
+				<!-- <div class="play-btn">
 																								                    <div class="play-btn-inner">
 																								                        
 																								                    </div>
 				</div> -->
-		</div>
-		<div class="app-picture app-picture-backend">
-		<img <img src="images/image_backend.jpg" />
-		</div>
+			</div>
+			<div class="app-picture app-picture-backend">
+				<img <img src="images/image_backend.jpg" />
+			</div>
 		</div>
 		<div class="box">
 			<div class="flip-box">
 				<div class="flip-box-inner">
 					<div class="flip-box-front">
 						<h2>Avis des utilisateurs sur le backend</h2>
+						<div id="avisDisplay" class="avisDisplay"></div>
 					</div>
 					<div class="flip-box-back">
 						<h2>Suite</h2>
@@ -37,6 +39,8 @@
 				</div>
 			</div>
 		</div>
-		</div>
-		</body>
+	</div>
+	<%- include("js/backend.ejs") %>
+</body>
+
 </html>
