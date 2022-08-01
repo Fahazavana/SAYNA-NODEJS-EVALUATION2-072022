@@ -31,7 +31,7 @@
     err.style.display = 'block'
   };
 
-  const onSubmitHandler = (e) => {
+        const onSubmitHandlers = (e) => {
     e.preventDefault();
     let errors = checkError();
     for (const [key, value] of Object.entries(errors)) {
@@ -39,6 +39,11 @@
     }
     errors = {}
   };
+
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault()
+  }
   form.addEventListener("submit", onSubmitHandler);
 
 </script>

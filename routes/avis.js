@@ -10,7 +10,7 @@ const {
 
 router.get("/", getAllAvis);
 router.post("/", addAvis);
-router.get("/backend", getBackEndAvis);
+ router.get("/backend", getBackEndAvis);
 router.get("/frontend", getFrontEndAvis);
 router.get("/marketing", getMarketingAvis);
 router.get("/uxui", getUXUIAvis);

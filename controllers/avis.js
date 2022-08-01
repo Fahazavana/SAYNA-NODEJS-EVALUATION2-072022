@@ -1,7 +1,4 @@
-const { avis } = require("../models");
-const db = require("../models");
-
-const Avis = db.avis;
+const connexion = require("../models/mysql");
 
 const addAvis = async (req, res) => {
   let data = {
@@ -26,60 +23,74 @@ const addAvis = async (req, res) => {
     });
   } else {
     try {
-      const avis = Avis.create(data);
-      res.json({
-        succes: "ok",
-        avis,
-      });
+      const avis = connexion.query(
+        "INSERT INTO Avis (firstname, lastname, avis, note, formation) VALUES (?,?,?,?,?)",
+        [data.firstname, data.lastname, data.avis, data.note, data.formation],
+        (error, data) => {
+          if (error) {
+            res.status(400).json({
+              error: true,
+              message: "Une erreur est survenu try",
+              error,
+            });
+          } else {
+            res.status(200).json({ error: false });
+          }
+        }
+      );
     } catch (err) {
       res.status(400).json({
         error: true,
         message: "Une erreur est survenu",
         err,
+        data,
       });
     }
   }
 };
+
 const getAllAvis = async (req, res) => {
-  let data = await Avis.findAll({
-    attributes: ["id", "firstname", "formation", "note", "avis"],
-    order: [["note", "DESC"]],
-  });
-  res.status(200).json({ data });
+  connexion.query(
+    "SELECT id,firstname,formation,note,avis from Avis ORDER BY note DESC",
+    (err, data) => {
+      res.status(200).json({ data });
+    }
+  );
+};
+const getBackEndAvis = async (req, res) => {
+  connexion.query(
+    "SELECT id,firstname,formation,note,avis from Avis WHERE formation='Backend' ORDER BY note DESC",
+    (err, data) => {
+      res.status(200).json({ data });
+    }
+  );
 };
 
-const getBackEndAvis = async (req, res) => {
-  let data = await Avis.findAll({
-    where: { formation: "Backend" },
-    attributes: ["id", "note", "firstname", "avis"],
-    order: [["note", "DESC"]],
-  });
-  res.status(200).json({ data });
+const getUXUIAvis = async (req, res) => {
+  connexion.query(
+    "SELECT id,firstname,formation,note,avis from Avis WHERE formation='UX-UI' ORDER BY note DESC",
+    (err, data) => {
+      res.status(200).json({ data });
+    }
+  );
 };
 
 const getFrontEndAvis = async (req, res) => {
-  let data = await Avis.findAll({
-    where: { formation: "Frontend" },
-    attributes: ["id", "note", "firstname", "avis"],
-    order: [["note", "DESC"]],
-  });
-  res.status(200).json({ data });
+  connexion.query(
+    "SELECT id,firstname,formation,note,avis from Avis WHERE formation='Frontend' ORDER BY note DESC",
+    (err, data) => {
+      res.status(200).json({ data });
+    }
+  );
 };
+
 const getMarketingAvis = async (req, res) => {
-  let data = await Avis.findAll({
-    where: { formation: "Marketing" },
-    attributes: ["id", "note", "firstname", "avis"],
-    order: [["note", "DESC"]],
-  });
-  res.status(200).json({ data });
-};
-const getUXUIAvis = async (req, res) => {
-  let data = await Avis.findAll({
-    where: { formation: "UX-UI" },
-    attributes: ["id", "note", "firstname", "avis"],
-    order: [["note", "DESC"]],
-  });
-  res.status(200).json({ data });
+  connexion.query(
+    "SELECT id,firstname,formation,note,avis from Avis WHERE formation='Marketing' ORDER BY note DESC",
+    (err, data) => {
+      res.status(200).json({ data });
+    }
+  );
 };
 module.exports = {
   addAvis,
