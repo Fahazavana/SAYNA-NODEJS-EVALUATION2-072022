@@ -267,3 +267,25 @@
 .text-center{
 	text-align: center;
 }
+
+
+.toast{
+	position: fixed;
+	top:50px;
+	right: 0;
+	opacity: 0.9;
+	color: white;
+	transition: all 1s ease-in-out;
+	font-weight: 500;
+	padding:10px;
+}
+
+.succes{
+	background-color: #45a049;
+}
+.failed{
+	background-color: red;
+}
+.d-none{
+	display: none;
+}

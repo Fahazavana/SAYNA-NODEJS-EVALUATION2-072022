@@ -1,6 +1,7 @@
 const connexion = require("../models/mysql");
 
 const addAvis = async (req, res) => {
+  console.log(req);
   let data = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,

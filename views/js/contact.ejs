@@ -1,48 +1,46 @@
-<script>
-
+<script>                                                                                                                                  const toast = document.querySelector('.toast');
   const fname = document.querySelector("#fname");
   const lname = document.querySelector("#lname");
   const avis = document.querySelector("#avis");
-                                      const note = document.querySelector("#Note");
+      const note = document.querySelector("#Note");
   const formation = document.querySelector("#formation");
   const form = document.querySelector("form");
 
-  const checkError = () => {
-    let errors = {};
-    if (!fname.value) {
-      errors.fname = "Prénom requis";
-    }
-    if (!lname.value) {
-      errors.lname = "Nom requis";
-    }
-    if (!avis.value) {
-      errors.avis = "Avis requis";
-    }
-    if (!note.value) {
-      errors.note = "Note requis";
-    }
-    return errors;
-  };
-
-  const setError = (key, value) => {
-    const id = key + "Error";
-    let err = document.getElementById(id);
-    err.innerText = value;
-    err.style.display = 'block'
-  };
-
-        const onSubmitHandlers = (e) => {
-    e.preventDefault();
-    let errors = checkError();
-    for (const [key, value] of Object.entries(errors)) {
-      setError(key, value);
-    }
-    errors = {}
-  };
-
-
   const onSubmitHandler = (e) => {
     e.preventDefault()
+    let data = new FormData()
+    const formvalue = { firstname: fname.value, lastname: lname.value, note: note.value, avis: avis.value, formation: formation.value }
+    data.append('json', JSON.stringify(formvalue))
+    toast.classList.remove('d-none')
+    setTimeout(() => {
+      toast.classList.add('d-none')
+    }, 3000)
+    fetch('/avis', {
+      method: 'POST',
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify(formvalue)
+    }).then((res) => {
+      if (res.status >= 200 && res.status < 300) {
+        toast.innerHTML = "Avis publié"
+        toast.classList.add('succes')
+        form.reset()
+      } else {
+        toast.innerHTML = "Impossible de publié l'avis"
+        toast.classList.add('failed')
+      }
+    }).catch((errors) => {
+      toast.innerHTML = "Une erreur est survenue"
+      toast.classList.add('failed')
+    }).finally(() => {
+      toast.classList.remove('d-none')
+      setTimeout(() => {
+        toast.classList.add('d-none')
+        toast.classList.contains('failed') ? toast.classList.remove('failed') : null;
+        toast.classList.contains('succes') ? toast.classList.remove('succes') : null;
+      }, 5000)
+    })
   }
   form.addEventListener("submit", onSubmitHandler);
 
